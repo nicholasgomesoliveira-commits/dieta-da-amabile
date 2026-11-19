@@ -22,7 +22,14 @@ const luizTueFri=[
 ['Lanche da tarde',['120 g de fruta','2 fatias de pão com 20 g de pasta de amendoim, 20 g de doce de leite e 30 g de queijo (fazer 2x pães desse)','2 bananas caramelizadas com 10 g de mel']],
 ['Jantar (reforçado)',['450 g de arroz ou macarrão','150 g de carne moída ou frango']]
 ];
-const luizDays=[null,luizMonThu,luizTueFri,null,luizMonThu,luizTueFri,null];
+const luizWedSat=[
+['Café da manhã',['50 g de tapioca com 2 ovos mexidos','2 bananas caramelizadas com 20 g de pasta de amendoim e 20 g de doce de leite','200 ml de leite com café']],
+['Lanche da manhã',['2 fatias de pão de forma com 20 g de queijo, 20 g de doce de leite e 20 g de pasta de amendoim']],
+['Almoço (reforçado)',['450 g de arroz ou macarrão','150 g de carne moída ou frango']],
+['Lanche da tarde',['120 g de fruta','2 fatias de pão com 20 g de pasta de amendoim, 20 g de doce de leite e 30 g de queijo (fazer 2x pães desse)','2 bananas caramelizadas com 10 g de mel']],
+['Jantar (reforçado)',['450 g de arroz ou macarrão','150 g de carne moída ou frango']]
+];
+const luizDays=[null,luizMonThu,luizTueFri,luizWedSat,luizMonThu,luizTueFri,luizWedSat];
 let profile='amabile';let day=new Date().getDay();let date=new Date().toLocaleDateString('en-CA');
 function key(s){return (profile==='amabile'?'amabile-':'luiz-')+date+'-'+s}
 function switchProfile(p){profile=p;render()}
@@ -36,7 +43,7 @@ document.getElementById('footLuiz').style.display=profile==='luiz'?'':'none';
 document.getElementById('waterSection').style.display=profile==='amabile'?'':'none';
 document.getElementById('dayTabs').innerHTML=[1,2,3,4,5,6,0].map(i=>'<button class="'+(day===i?'active':'')+'" onclick="switchDay('+i+')">'+days[i].name+'</button>').join('');
 const d=days[day];const meals=profile==='amabile'?d.meals:luizDays[day];
-document.getElementById('dayInfo').textContent=profile==='amabile'?d.type+' · '+d.training:(meals?'Dieta cadastrada · '+(day===1?'Segunda-feira':day===2?'Terça-feira':day===4?'Quinta-feira':'Sexta-feira'):'Dieta ainda não cadastrada');
+document.getElementById('dayInfo').textContent=profile==='amabile'?d.type+' · '+d.training:(meals?'Dieta cadastrada · '+(day===1?'Segunda-feira':day===2?'Terça-feira':day===3?'Quarta-feira':day===4?'Quinta-feira':day===5?'Sexta-feira':'Sábado'):'Dieta ainda não cadastrada');
 document.getElementById('meals').innerHTML=meals?meals.map((m,i)=>'<section class="meal"><h2>'+(i+1)+'. '+m[0]+'</h2><ul>'+m[1].map(x=>'<li>'+x+'</li>').join('')+'</ul><label class="check"><input type="checkbox" '+(localStorage.getItem(key('dia-'+day+'-'+i))==='true'?'checked':'')+' onchange="localStorage.setItem(key(\'dia-'+day+'-'+i+'\'),this.checked)"> Refeição realizada</label></section>').join(''):'<div class="pending">Aguardando o cadastro da dieta deste dia para o Luiz Otávio.</div>';
 if(profile==='amabile')waterRender();
 }
