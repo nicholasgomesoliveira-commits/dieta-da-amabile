@@ -29,7 +29,7 @@ const luizWedSat=[
 ['Lanche da tarde',['120 g de fruta','2 fatias de pão com 20 g de pasta de amendoim, 20 g de doce de leite e 30 g de queijo (fazer 2x pães desse)','2 bananas caramelizadas com 10 g de mel']],
 ['Jantar (reforçado)',['450 g de arroz ou macarrão','150 g de carne moída ou frango']]
 ];
-const luizDays=[null,luizMonThu,luizTueFri,luizWedSat,luizMonThu,luizTueFri,luizWedSat];
+const luizDays=[null,luizTueFri,luizMonThu,luizWedSat,luizTueFri,luizMonThu,luizWedSat];
 let profile='amabile';let day=new Date().getDay();let date=new Date().toLocaleDateString('en-CA');
 function key(s){return (profile==='amabile'?'amabile-':'luiz-')+date+'-'+s}
 function switchProfile(p){profile=p;render()}
